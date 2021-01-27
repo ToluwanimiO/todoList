@@ -12,12 +12,12 @@
         <tbody>
             <tr v-for="(item,index) in tasksArray" :key="index" :class="item.status=='checked'?'strike':''">
             <td scope="row">
-                <input type="checkbox" class="mr-2" @click="check(index)" :id="index">
+                <input type="checkbox" class="mr-2" @click="check(index)" :id="index" :checked="item.status=='checked'?true:false">
                 {{item.value}}
             </td>
             <td>{{item.date}}</td>
             <td>{{item.time}}</td>
-            <td><span class="fa fa-trash text-danger"></span></td>
+            <td><span class="fa fa-trash text-danger pointDel" @click="deleteItem(index)"></span></td>
             </tr>
         </tbody>
     </table>
@@ -32,7 +32,8 @@ export default {
     },
     data(){
         return{
-            tasksArray:this.task
+            tasksArray:this.task,
+            checkedValue:this.checked
         }
     },
     methods:{
@@ -40,13 +41,22 @@ export default {
             var checkBox = document.getElementById(val)
             if(checkBox.checked){
                 this.tasksArray[val].status="checked"
-                this.checked+=1
+                this.checkedValue+=1
             }else{
                 this.tasksArray[val].status="unchecked"
-                this.checked-=1
+                this.checkedValue-=1
 
             }
-            this.$emit("checkedTask",this.tasksArray,this.checked)
+            this.$emit("checkedTask",this.tasksArray,this.checkedValue)
+        },
+        deleteItem:function(index){
+            // alert(index)
+            if(this.tasksArray[index].status=="checked"){
+                this.checkedValue-=1
+            }
+            this.tasksArray.splice(index,1)
+            console.log(this.tasksArray)
+            this.$emit("deletedTask",this.tasksArray,this.checkedValue)
         }
     }
 }
@@ -55,5 +65,8 @@ export default {
     .strike{
         text-decoration: line-through;
         /* background-color: #d7dde2; */
+    }
+    .pointDel{
+        cursor: pointer;
     }
 </style>

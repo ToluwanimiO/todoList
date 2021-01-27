@@ -1,19 +1,16 @@
 <template>
   <div>
-    <nav class="navbar navbar-light bg-dark p-3">
-      <span class="navbar-brand mb-0 h1 d-block mx-auto text-white">My Todo</span>
-    </nav>
-    <div id="app" class="col-md-7 mx-auto">
-    {{checked +"/"+ task.length}}
-    <Input @add-task="newTask"/>
-    <Items :task="task" :checked="checked" @checkedTask="checkTasks"/>
-  </div>
-  </div>
+    <div class="col-md-9 mx-auto pt-5">
+      <p class="text-center">{{checked+"/"+task.length}}</p>
+      <Input @add-task="newTask"/>
+      <Items :task="task" :checked="checked" @checkedTask="checkTask" @deletedTask="deleteTask"/>
+    </div>
+  </div>  
 </template>
 
 <script>
-import Input from './components/input'
-import Items from './components/items'
+import Input from './components/input';
+import Items from './components/items';
 export default {
   name: 'App',
   components: {
@@ -28,25 +25,23 @@ export default {
   },
   methods:{
     newTask:function(value,date,time){
-      // alert(value)
+      console.log(value)
       this.task.push({value,date,time,status:"unchecked"})
     },
-    checkTasks(value,check){
-      console.log(value);
-      this.task=value
-      this.checked=check
+    checkTask:function(value,checkVal){
+      this.task=value;
+      this.checked=checkVal;
+    },
+    deleteTask:function(value,checkVal){
+      this.task=value;
+      this.checked=checkVal;
+
     }
   }
+  
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+
 </style>
