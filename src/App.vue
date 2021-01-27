@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="bg-dark p-3 text-white text-center todo">Todo List</div>
     <div class="col-md-9 mx-auto pt-5">
       <p class="text-center">{{checked+"/"+task.length}}</p>
       <Input @add-task="newTask"/>
@@ -43,5 +44,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .todo{
+    font-size: 2em;
+  }
 </style>
