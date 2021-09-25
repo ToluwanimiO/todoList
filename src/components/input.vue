@@ -1,12 +1,12 @@
 <template lang="">
     <div class="row p-0 mb-3" id="con">
-        <div class="col-5 p-0">
+        <div class="col-md-5 p-0">
             <input type="text" class="form-control rounded-0" id="inp" placeholder="Enter task" v-model="task"/>
         </div>
-        <div class="col-3 p-0">
+        <div class="col-md-3 p-0">
             <input type="date" class="form-control rounded-0" id="inp" placeholder="Deadline" v-model="date"/>
         </div>
-        <div class="col-3 p-0">
+        <div class="col-11 col-md-3 p-0">
             <input type="time" class="form-control rounded-0" id="inp" placeholder="Deadline" v-model="time"/>
         </div>
         <div class="col-1 bg-dark" id="addBg" @click="addTask">
